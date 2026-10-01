@@ -156,14 +156,6 @@
 </style>
 </head>
 <body data-theme="ivory">
-  <div class="themebar" id="themebar">
-    <button data-t="">Paper</button>
-    <button data-t="grey">Grey</button>
-    <button data-t="mist">Mist</button>
-    <button data-t="ivory" class="on">Ivory</button>
-    <button data-t="slate">Slate</button>
-    <button data-t="ink">Ink</button>
-  </div>
   <div id="wrap"><div class="stage">
 
     <!-- SLIDE 1 -->
@@ -235,13 +227,6 @@
     wrap.style.transform='scale('+s+')';}
   window.addEventListener('resize',fit);fit();
 
-  const tbtns=[...document.querySelectorAll('.themebar button')];
-  function setTheme(t,btn){
-    if(t) document.body.dataset.theme=t; else delete document.body.dataset.theme;
-    tbtns.forEach(b=>b.classList.toggle('on',b===btn));
-  }
-  tbtns.forEach(b=>b.onclick=()=>setTheme(b.dataset.t,b));
-
   const slides=[...document.querySelectorAll('.slide')];let i=0;
   const counter=document.getElementById('counter');
   function show(n){i=(n+slides.length)%slides.length;
@@ -250,7 +235,6 @@
   document.getElementById('next').onclick=()=>show(i+1);
   document.getElementById('prev').onclick=()=>show(i-1);
   document.addEventListener('keydown',e=>{
-    const n=parseInt(e.key); if(n>=1&&n<=tbtns.length){tbtns[n-1].click();return;}
     if(['ArrowRight','PageDown',' '].includes(e.key))show(i+1);
     if(['ArrowLeft','PageUp'].includes(e.key))show(i-1);
     if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);});
