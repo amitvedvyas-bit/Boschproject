@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kick-off · HS Pforzheim × Bosch Engineering Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{  /* default = Paper White */
+    --font-display:'Fraunces',Georgia,'Times New Roman',serif;
+    --font-ui:'Inter','Helvetica Neue',Arial,sans-serif;
+    --font-eyebrow:'Space Grotesk',var(--font-ui);
+    --ink:#1a1d1f; --ink2:#41474a; --faint:#8b9196;
+    --hair:#e4e6e7; --hair-soft:#eef0f1; --card:#f5f6f6;
+    --accent:#2f5d7c; --paper:#ffffff; --surround:#d9dbdc;
+  }
+  body[data-theme="grey"]{
+    --paper:#f6f7f8; --surround:#dcdee0; --hair:#e2e5e7; --hair-soft:#edeff1; --card:#eceef0;}
+  body[data-theme="mist"]{
+    --paper:#eef2f5; --surround:#d4dadf; --hair:#dde4ea; --hair-soft:#e6ebef; --card:#e3e9ee;}
+  body[data-theme="ivory"]{  /* Warm Ivory - locked default */
+    --paper:#faf7f1; --surround:#e4ded0; --ink:#211d16; --ink2:#524836; --faint:#8a7d63;
+    --hair:#e8e1d4; --hair-soft:#f1ebdd; --card:#f1ead9; --accent:#8a6a43;}
+  body[data-theme="slate"]{
+    --paper:#242a2f; --surround:#14171a; --ink:#f2f5f6; --ink2:#c3c9cd; --faint:#808a90;
+    --hair:#3a4247; --hair-soft:#2f363b; --card:#2d343a; --accent:#7ab0d4;}
+  body[data-theme="ink"]{
+    --paper:#17191b; --surround:#0b0c0d; --ink:#f4f4f3; --ink2:#c0c4c7; --faint:#787c7f;
+    --hair:#2c2f31; --hair-soft:#232527; --card:#202224; --accent:#c89b55;}
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font-ui);background:var(--surround);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased;transition:background .25s;
+  }
+  #wrap{width:1280px;height:720px;transform-origin:center center}
+  .stage{position:relative;width:1280px;height:720px;background:var(--paper);
+          box-shadow:0 24px 80px rgba(0,0,0,.4)}
+  .slide{position:absolute;inset:0;padding:76px 90px;display:none;flex-direction:column}
+  .slide.active{display:flex}
+
+  .eyebrow{font-family:var(--font-eyebrow);font-size:14px;letter-spacing:.3em;font-weight:600;
+           text-transform:uppercase;color:var(--accent)}
+  .eyebrow i{color:var(--faint);font-weight:500;font-style:normal}
+  .accent-rule{height:3px;width:56px;background:var(--accent);border-radius:2px}
+
+  /* ---------- slide 1 - centered hero ---------- */
+  .s1{justify-content:center;align-items:center;text-align:center}
+  .s1 .eyebrow{margin-bottom:30px}
+  .s1 h1{font-family:var(--font-display);font-size:98px;font-weight:600;line-height:.98;
+         letter-spacing:-.025em;color:var(--ink)}
+  .s1 h1 i{font-style:italic;font-weight:500;color:var(--accent)}
+  .s1 .accent-rule{margin:34px auto 0}
+  .s1 .sub{font-size:24px;color:var(--ink2);margin-top:30px;font-weight:400;line-height:1.5;max-width:30ch}
+  .s1 .date{margin-top:34px;font-size:17px;color:var(--ink);font-weight:600;
+            display:inline-flex;align-items:center;gap:11px}
+  .s1 .date::before{content:"";width:9px;height:9px;background:var(--accent);border-radius:50%}
+  .s1 .foot{position:absolute;left:90px;right:90px;bottom:56px;text-align:center}
+  .s1 .foot .line{height:1px;background:var(--hair);margin-bottom:16px}
+  .s1 .foot .row{font-size:15px;color:var(--ink);font-weight:700}
+  .s1 .foot .meta{font-size:13px;color:var(--ink2);margin-top:7px}
+  .s1 .foot .meta b{color:var(--ink);font-weight:600}
+  .s1 .foot .meta span{color:var(--faint)}
+
+  /* ---------- slide 2 - team ---------- */
+  .s2{align-items:center;text-align:center}
+  .head{font-family:var(--font-display);font-size:52px;font-weight:600;letter-spacing:-.02em}
+  .s2 .accent-rule{margin:18px auto 0}
+  .team{display:flex;gap:44px;justify-content:center;margin:auto 0}
+  .card{width:252px}
+  .photo{width:252px;height:252px;background:var(--card);border:1px solid var(--hair);
+         border-radius:6px;display:flex;align-items:center;justify-content:center;
+         color:var(--faint);font-family:var(--font-eyebrow);font-size:12px;font-weight:600;
+         letter-spacing:.2em;background-size:cover;background-position:center}
+  .card .name{margin-top:20px;font-family:var(--font-display);font-size:24px;font-weight:600;text-align:center}
+
+  /* ---------- slide 3 - work packages + questions ---------- */
+  .s3 h2{font-family:var(--font-display);font-size:30px;font-weight:600;letter-spacing:-.02em}
+  .s3 h2 i{color:var(--accent);font-weight:500;font-style:italic}
+  .s3-cols{display:flex;gap:0;margin-top:18px;flex:1}
+  .col-wp{flex:1.3;padding-right:40px}
+  .col-q{flex:1;padding-left:40px;border-left:1px solid var(--hair)}
+  .col-lab{font-family:var(--font-eyebrow);font-size:11.5px;letter-spacing:.2em;font-weight:600;
+           color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+  /* work packages */
+  .wp{display:flex;align-items:flex-start;gap:12px;padding:6px 0;border-bottom:1px solid var(--hair-soft)}
+  .wp .n{font-family:var(--font-eyebrow);font-weight:700;color:var(--accent);font-size:12px;
+         letter-spacing:.03em;min-width:34px;padding-top:1px}
+  .wp .b{flex:1}
+  .wp .nm{font-weight:700;font-size:13.5px;color:var(--ink);line-height:1.25}
+  .wp .fo{font-size:12px;color:var(--ink2);margin-top:1px;line-height:1.3}
+  .wp .chip{font-family:var(--font-eyebrow);font-size:10.5px;font-weight:700;letter-spacing:.03em;
+            color:var(--accent);border:1px solid var(--accent);border-radius:999px;
+            padding:2px 8px;align-self:center;white-space:nowrap}
+  .wp-div{font-family:var(--font-eyebrow);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+          font-weight:700;color:var(--accent);background:var(--hair-soft);border-radius:4px;
+          text-align:center;padding:6px 8px;margin:7px 0}
+  .wp-break{font-family:var(--font-eyebrow);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+            font-weight:600;color:var(--ink2);border:1px dashed var(--hair);border-radius:4px;
+            text-align:center;padding:5px 8px;margin:7px 0}
+  .wp-final{font-family:var(--font-eyebrow);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+            font-weight:700;color:var(--paper);background:var(--accent);border-radius:4px;
+            text-align:center;padding:6px 8px;margin:7px 0}
+  .wp .when{font-family:var(--font-eyebrow);font-size:11px;font-weight:600;letter-spacing:.03em;
+            color:var(--ink2);align-self:center;white-space:nowrap;min-width:92px;text-align:right}
+  /* milestone timeline strip */
+  .tl{display:flex;align-items:center;gap:0;margin:4px 0 16px}
+  .tl .pt{display:flex;flex-direction:column;line-height:1.25;white-space:nowrap}
+  .tl .pt .m{font-family:var(--font-eyebrow);font-size:12px;font-weight:700;color:var(--ink);
+             letter-spacing:.02em;display:flex;align-items:center;gap:7px}
+  .tl .pt .m::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--accent)}
+  .tl .pt .d{font-size:11px;color:var(--ink2);margin-left:16px}
+  .tl .ln{flex:1;height:2px;background:var(--hair);margin:0 14px;margin-bottom:14px}
+  /* questions */
+  .q{padding:9px 0;border-bottom:1px solid var(--hair-soft)}
+  .q:last-child{border-bottom:none}
+  .q .qt{font-size:12.5px;color:var(--ink);line-height:1.34}
+  .q .qt b{font-weight:700}
+  .q .qn{font-family:var(--font-eyebrow);font-weight:700;color:var(--accent);font-size:12px;margin-right:7px}
+  .q.first{background:linear-gradient(90deg,var(--hair-soft),transparent);border-radius:5px;
+           padding:9px 10px;margin:0 -10px}
+  .q .flag{display:inline-block;font-family:var(--font-eyebrow);font-size:9px;letter-spacing:.1em;
+           text-transform:uppercase;font-weight:700;color:var(--accent);margin-left:6px;
+           border:1px solid var(--accent);border-radius:999px;padding:1px 6px;vertical-align:middle}
+  .s3-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--hair);
+           font-size:11.5px;color:var(--ink2);line-height:1.4}
+  .s3-foot b{color:var(--ink);font-weight:600}
+
+  /* nav */
+  .nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+       display:flex;gap:16px;align-items:center;z-index:10}
+  .nav button{background:none;border:1px solid rgba(128,128,128,.55);color:#888;
+       width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer;line-height:1}
+  .nav button:hover{background:rgba(128,128,128,.18)}
+  .counter{font-size:13px;color:#888;min-width:40px;text-align:center}
+
+  /* theme switcher */
+  .themebar{position:fixed;top:14px;left:50%;transform:translateX(-50%);
+            display:flex;gap:6px;z-index:20;background:rgba(255,255,255,.78);
+            backdrop-filter:blur(6px);padding:6px;border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+  .themebar button{border:1px solid transparent;background:none;cursor:pointer;
+            font:600 12px/1 var(--font-eyebrow);color:#333;padding:7px 12px;border-radius:999px}
+  .themebar button:hover{background:rgba(0,0,0,.06)}
+  .themebar button.on{background:#1a1d1f;color:#fff}
+
+  @media print{
+    body{background:#fff}.nav,.themebar{display:none}
+    #wrap{transform:none !important}
+    .stage{box-shadow:none;page-break-after:always}
+    .slide{display:flex !important}
+  }
+</style>
+</head>
+<body data-theme="ivory">
+  <div class="themebar" id="themebar">
+    <button data-t="">Paper</button>
+    <button data-t="grey">Grey</button>
+    <button data-t="mist">Mist</button>
+    <button data-t="ivory" class="on">Ivory</button>
+    <button data-t="slate">Slate</button>
+    <button data-t="ink">Ink</button>
+  </div>
+  <div id="wrap"><div class="stage">
+
+    <!-- SLIDE 1 -->
+    <section class="slide s1 active">
+      <div class="eyebrow">HOCHSCHULE PFORZHEIM &nbsp;<i>/ MBA CAPSTONE PROJECT</i></div>
+      <h1>From In-House<br>to <i>Market</i></h1>
+      <div class="accent-rule"></div>
+      <div class="sub">Market-Entry Strategy for Bosch Engineering Consulting</div>
+      <div class="date">Project Kick-off · 2 October 2026</div>
+      <div class="foot">
+        <div class="line"></div>
+        <div class="row">Amit · Anchal · Chirag · Sanket</div>
+        <div class="meta"><span>Academic supervisor</span> <b>Prof. Korbinian Eichner</b> &nbsp;·&nbsp; <span>in collaboration with</span> <b>Bosch Engineering Consulting</b></div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2 -->
+    <section class="slide s2">
+      <div class="head">Meet the team</div>
+      <div class="accent-rule"></div>
+      <div class="team">
+        <div class="card"><div class="photo" style="background-image:url('photos/amit.jpg');background-size:155%;background-position:center 22%"></div><div class="name">Amit</div></div>
+        <div class="card"><div class="photo" style="background-image:url('photos/anchal.jpg');background-position:center top"></div><div class="name">Anchal</div></div>
+        <div class="card"><div class="photo" style="background-image:url('photos/chirag.jpg');background-size:auto 116%;background-repeat:no-repeat;background-position:center 20%"></div><div class="name">Chirag</div></div>
+        <div class="card"><div class="photo" style="background-image:url('photos/sanket.jpg');background-size:130%;background-position:center 32%"></div><div class="name">Sanket</div></div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3 -->
+    <section class="slide s3">
+      <h2>Our work packages:<i> the plan from here to market</i></h2>
+      <div class="s3-cols">
+
+        <div class="col-wp">
+          <div class="col-lab">Our work packages &amp; schedule</div>
+          <div class="tl">
+            <div class="pt"><div class="m">Kick-off</div><div class="d">2 Oct 2026</div></div>
+            <div class="ln"></div>
+            <div class="pt"><div class="m">Mid-term</div><div class="d">13 Nov · HS PF</div></div>
+            <div class="ln"></div>
+            <div class="pt"><div class="m">Final</div><div class="d">2nd half Jan 2027 · Bosch</div></div>
+          </div>
+          <div class="wp"><div class="n">WP1</div><div class="b"><div class="nm">Capability &amp; Market Research</div><div class="fo">Transferable internal capabilities + demand signals, segments, rough sizing</div></div><div class="when">2–16 Oct</div></div>
+          <div class="wp"><div class="n">WP2</div><div class="b"><div class="nm">Competitor &amp; Positioning</div><div class="fo">Landscape and where we could stand out</div></div><div class="when">17–31 Oct</div></div>
+          <div class="wp"><div class="n">WP3</div><div class="b"><div class="nm">Market Hypotheses</div><div class="fo">Top 5 priority domains &amp; first offer directions</div></div><div class="when">1–15 Nov</div></div>
+          <div class="wp-div">◆ &nbsp;Mid-term meeting · 13 November · present WP1–WP3</div>
+          <div class="wp"><div class="n">WP4</div><div class="b"><div class="nm">Customer Validation</div><div class="fo">Validate the direction through interviews (later phase)</div></div><div class="when">15–30 Nov</div></div>
+          <div class="wp"><div class="n">WP5</div><div class="b"><div class="nm">Offer, Pricing &amp; Partnerships</div><div class="fo">Refine the offer; pricing and partnership options</div></div><div class="when">1–15 Dec</div></div>
+          <div class="wp-break">✦ &nbsp;Christmas &amp; New Year break &nbsp;·&nbsp; 15–31 Dec</div>
+          <div class="wp"><div class="n">WP6</div><div class="b"><div class="nm">Market-Entry Roadmap</div><div class="fo">90-day + 12–18 month roadmap and KPIs</div></div><div class="when">1–15 Jan</div></div>
+          <div class="wp-final">★ &nbsp;Final presentation · second half of January 2027</div>
+        </div>
+
+      </div>
+      <div class="s3-foot">Interviews (<b>WP4</b>) run in the later phase, once our first go-to-market findings unlock Bosch contact introductions. Detailed packages, available tools and timing are in your hand-outs.</div>
+    </section>
+
+  </div></div>
+
+  <div class="nav">
+    <button id="prev" aria-label="Previous">‹</button>
+    <span class="counter" id="counter">1 / 3</span>
+    <button id="next" aria-label="Next">›</button>
+  </div>
+
+<script>
+  const wrap=document.getElementById('wrap');
+  function fit(){const s=Math.min(window.innerWidth/1280,window.innerHeight/720);
+    wrap.style.transform='scale('+s+')';}
+  window.addEventListener('resize',fit);fit();
+
+  const tbtns=[...document.querySelectorAll('.themebar button')];
+  function setTheme(t,btn){
+    if(t) document.body.dataset.theme=t; else delete document.body.dataset.theme;
+    tbtns.forEach(b=>b.classList.toggle('on',b===btn));
+  }
+  tbtns.forEach(b=>b.onclick=()=>setTheme(b.dataset.t,b));
+
+  const slides=[...document.querySelectorAll('.slide')];let i=0;
+  const counter=document.getElementById('counter');
+  function show(n){i=(n+slides.length)%slides.length;
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    counter.textContent=(i+1)+' / '+slides.length;}
+  document.getElementById('next').onclick=()=>show(i+1);
+  document.getElementById('prev').onclick=()=>show(i-1);
+  document.addEventListener('keydown',e=>{
+    const n=parseInt(e.key); if(n>=1&&n<=tbtns.length){tbtns[n-1].click();return;}
+    if(['ArrowRight','PageDown',' '].includes(e.key))show(i+1);
+    if(['ArrowLeft','PageUp'].includes(e.key))show(i-1);
+    if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);});
+</script>
+</body>
+</html>
