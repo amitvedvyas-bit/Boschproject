@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Internal Expertise to External Opportunities · Bosch Engineering Consulting · HS Pforzheim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --f-display:'Fraunces',Georgia,serif;
+  --f-ui:'Inter','Helvetica Neue',Arial,sans-serif;
+  --f-mono:'Space Grotesk',var(--f-ui);
+}
+/* ============ THEMES ============ */
+body[data-theme="aurora"]{
+  --bg:#0b1020; --bg2:#141b33; --panel:rgba(255,255,255,.045); --panel-b:rgba(255,255,255,.1);
+  --ink:#f2f5ff; --ink2:#b9c2e0; --faint:#737ea8;
+  --accent:#6ea8ff; --accent2:#b58dff; --good:#4fd8c4; --warn:#ffcb6b; --bad:#ff7a90;
+  --glow:radial-gradient(1200px 600px at 78% -10%,rgba(123,97,255,.28),transparent 60%),radial-gradient(900px 500px at 10% 110%,rgba(79,216,196,.18),transparent 55%);
+}
+body[data-theme="paper"]{
+  --bg:#f6f3ec; --bg2:#fffdf8; --panel:#ffffff; --panel-b:#e7e0d2;
+  --ink:#201c15; --ink2:#5a5244; --faint:#9a8f78;
+  --accent:#b5641e; --accent2:#2f7d6b; --good:#2f7d6b; --warn:#b5841e; --bad:#c0442f;
+  --glow:radial-gradient(1000px 500px at 85% -10%,rgba(181,100,30,.08),transparent 60%);
+}
+body[data-theme="signal"]{
+  --bg:#ffffff; --bg2:#f6f8fa; --panel:#ffffff; --panel-b:#e4e9ed;
+  --ink:#1b2530; --ink2:#55626f; --faint:#9aa6b2;
+  --accent:#e2001a; --accent2:#0a7a7a; --good:#0a7a7a; --warn:#b5790a; --bad:#e2001a;
+  --glow:radial-gradient(900px 480px at 88% -12%,rgba(226,0,26,.06),transparent 60%);
+}
+body[data-theme="forest"]{
+  --bg:#08140f; --bg2:#0f2219; --panel:rgba(255,255,255,.04); --panel-b:rgba(255,255,255,.1);
+  --ink:#eafaf0; --ink2:#a7c9b6; --faint:#5f8571;
+  --accent:#4fd89a; --accent2:#9fe870; --good:#4fd89a; --warn:#ffcb6b; --bad:#ff8aa0;
+  --glow:radial-gradient(1100px 560px at 80% -10%,rgba(79,216,154,.22),transparent 60%),radial-gradient(800px 460px at 5% 110%,rgba(159,232,112,.12),transparent 55%);
+}
+body[data-theme="mono"]{
+  --bg:#111113; --bg2:#1b1b1e; --panel:rgba(255,255,255,.05); --panel-b:rgba(255,255,255,.13);
+  --ink:#f4f4f5; --ink2:#bcbcc0; --faint:#77777c;
+  --accent:#e8e8ea; --accent2:#9a9aa0; --good:#cfcfd4; --warn:#d8d8dc; --bad:#f4f4f5;
+  --glow:radial-gradient(1000px 520px at 82% -10%,rgba(255,255,255,.06),transparent 60%);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--f-ui);background:var(--bg);color:var(--ink);overflow:hidden;
+  -webkit-font-smoothing:antialiased;transition:background .5s,color .5s;display:flex;
+  align-items:center;justify-content:center;height:100vh}
+#stageWrap{width:1280px;height:720px;transform-origin:center center}
+.stage{position:relative;width:1280px;height:720px;background:var(--bg);overflow:hidden;
+  border-radius:18px;box-shadow:0 30px 100px rgba(0,0,0,.55)}
+.stage::before{content:"";position:absolute;inset:0;background:var(--glow);pointer-events:none;transition:background .5s}
+
+.slide{position:absolute;inset:0;padding:64px 74px 70px;display:none;flex-direction:column;
+  opacity:0;transform:translateY(14px)}
+.slide.active{display:flex;animation:in .55s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes in{to{opacity:1;transform:none}}
+
+.eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.3em;font-weight:600;
+  text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:11px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent)}
+h1.title{font-family:var(--f-display);font-size:42px;font-weight:600;letter-spacing:-.02em;
+  line-height:1.05;margin-top:18px}
+h1.title em{font-style:italic;color:var(--accent)}
+.lede{font-size:16px;color:var(--ink2);margin-top:14px;max-width:70ch;line-height:1.5}
+.foot{position:absolute;left:74px;right:74px;bottom:26px;font-size:11.5px;color:var(--faint);
+  display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--panel-b);padding-top:11px}
+
+.panel{background:var(--panel);border:1px solid var(--panel-b);border-radius:14px}
+
+/* HERO */
+.hero{flex:1;display:flex;flex-direction:column;justify-content:center}
+.hero .brandlock{background:#fff;border-radius:12px;padding:6px 20px;align-self:flex-start;
+  margin-bottom:26px;box-shadow:0 8px 28px rgba(0,0,0,.25);overflow:hidden}
+.hero .brandlock img{display:block;width:190px;height:52px;object-fit:cover;object-position:center}
+.hero .eyebrow{margin-bottom:24px}
+.hero h1{font-family:var(--f-display);font-size:74px;font-weight:600;line-height:.98;letter-spacing:-.03em}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero .q{font-size:24px;color:var(--ink2);margin-top:28px;max-width:30ch;line-height:1.3;font-weight:500}
+.hero .rowmeta{display:flex;gap:40px;margin-top:40px;align-items:center}
+.hero .chip{font-family:var(--f-mono);font-size:12px;font-weight:600;letter-spacing:.12em;
+  padding:10px 16px;border-radius:999px;background:var(--panel);border:1px solid var(--panel-b);color:var(--ink2)}
+.hero .funnelmini{display:flex;align-items:center;gap:12px;font-family:var(--f-mono);font-weight:700;font-size:15px}
+.hero .funnelmini .big{font-size:40px;color:var(--accent);line-height:1}
+.hero .funnelmini .arr{color:var(--faint);font-size:20px}
+.hero .funnelmini .big2{font-size:40px;color:var(--accent2);line-height:1}
+.hero .credit{margin-top:34px;font-size:13px;color:var(--ink2)}
+.hero .credit b{color:var(--ink);font-weight:600}
+
+/* STATS count-up */
+.statrow{display:flex;gap:22px;margin:26px 0 8px}
+.statcard{flex:1;padding:24px 22px}
+.statcard .n{font-family:var(--f-display);font-size:58px;font-weight:600;line-height:1;color:var(--accent);letter-spacing:-.02em}
+.statcard .l{font-size:13.5px;color:var(--ink2);margin-top:12px;line-height:1.35}
+.findrow{display:flex;flex-direction:column;gap:13px;margin-top:20px}
+.find{display:flex;gap:16px;align-items:center}
+.find .fb{flex:none;width:34px;height:34px;border-radius:10px;background:var(--panel);border:1px solid var(--panel-b);
+  color:var(--accent);font-family:var(--f-mono);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.find .ft{font-weight:700;font-size:15.5px;width:320px;flex:none}
+.find .fd{color:var(--ink2);font-size:14px;line-height:1.4}
+
+/* INTERACTIVE FUNNEL */
+.funnelflow{display:flex;align-items:center;gap:8px;margin-top:26px}
+.fchev{color:var(--faint);font-size:24px;font-weight:700}
+.fcol{flex:1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:14px 10px;transition:.3s}
+.fcol .fk{font-family:var(--f-display);font-size:32px;font-weight:600;color:var(--accent);line-height:1}
+.fcol .fn{font-size:12.5px;color:var(--ink2);margin-top:8px;letter-spacing:.02em;line-height:1.25}
+.fcol.domains,.fcol.out{background:var(--panel);border:1px solid var(--panel-b)}
+.fcol.domains{height:170px}.fcol.out{height:120px}
+.fcol.out .fk{color:var(--accent2)}
+.fcol.gate{cursor:pointer;background:var(--panel);border:1px solid var(--panel-b)}
+.fcol.gate[data-gate="0"]{height:158px}.fcol.gate[data-gate="1"]{height:142px}.fcol.gate[data-gate="2"]{height:128px}
+.fcol.gate .fk{font-family:var(--f-mono);letter-spacing:.08em;font-size:26px}
+.fcol.gate:hover{border-color:var(--accent);transform:translateY(-3px)}
+.fcol.gate.on{background:linear-gradient(160deg,var(--accent),var(--accent2));border-color:transparent;
+  box-shadow:0 16px 40px rgba(0,0,0,.3)}
+.fcol.gate.on .fk,.fcol.gate.on .fn{color:#07122a}
+.gatedetail{margin-top:24px;padding:22px 26px;display:flex;gap:28px;align-items:flex-start;min-height:156px}
+.gatedetail .gleft{flex:none;width:168px}
+.gatedetail .gtag{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.1em;font-weight:700;color:var(--accent)}
+.gatedetail .gname{font-family:var(--f-display);font-size:21px;font-weight:600;margin-top:8px;line-height:1.12}
+.gatedetail .gbody{flex:1}
+.gatedetail .gbody p{font-size:14px;color:var(--ink2);line-height:1.5}
+.gatedetail .gkpis{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.gatedetail .gchip{font-family:var(--f-mono);font-size:11px;font-weight:600;padding:6px 11px;border-radius:7px;
+  background:var(--bg2);border:1px solid var(--panel-b);color:var(--ink2)}
+.gatedetail .grule{margin-top:13px;font-size:12.5px;color:var(--ink);background:var(--bg2);
+  border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;line-height:1.4}
+
+/* KPI pills */
+.kpigrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;flex:1;align-content:center}
+.kpi{padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
+.kpi .kn{flex:none;width:30px;height:30px;border-radius:9px;background:var(--panel);border:1px solid var(--panel-b);
+  color:var(--accent);font-family:var(--f-mono);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.kpi .kt{font-weight:700;font-size:14.5px} .kpi .kd{font-size:12.5px;color:var(--ink2);margin-top:3px;line-height:1.35}
+.kpi .tagc{font-family:var(--f-mono);font-size:10px;font-weight:700;letter-spacing:.1em;padding:3px 8px;border-radius:6px;
+  background:var(--panel);border:1px solid var(--panel-b);color:var(--accent2);align-self:center;margin-left:auto}
+
+/* EXPLORER (WP1 / WP2) */
+.exwrap{display:flex;gap:26px;flex:1;margin-top:20px;min-height:0}
+.exnav{flex:none;width:250px;display:flex;flex-direction:column;gap:8px;overflow:auto}
+.exbtn{text-align:left;padding:12px 15px;border-radius:11px;background:var(--panel);border:1px solid var(--panel-b);
+  color:var(--ink2);cursor:pointer;transition:.2s;font-family:var(--f-ui)}
+.exbtn:hover{border-color:var(--accent)}
+.exbtn.on{background:linear-gradient(120deg,var(--accent),var(--accent2));border-color:transparent;color:#07122a}
+.exbtn .nm{font-weight:700;font-size:14px} .exbtn .sub{font-size:11.5px;opacity:.8;margin-top:2px}
+.exbtn.on .sub{color:#0a1630}
+.expanel{flex:1;padding:26px 28px;display:flex;flex-direction:column;min-width:0;overflow:auto}
+.exhead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.exhead h3{font-family:var(--f-display);font-size:24px;font-weight:600;line-height:1.1}
+.exhead .meta{font-size:12px;color:var(--faint);font-family:var(--f-mono);letter-spacing:.06em;white-space:nowrap;text-align:right}
+.svcscore{margin-top:18px;display:flex;flex-direction:column;gap:12px}
+.svc{display:flex;align-items:center;gap:14px}
+.svc .snm{width:260px;flex:none;font-size:13.5px;font-weight:600}
+.svc .track{flex:1;height:10px;border-radius:999px;background:var(--panel-b);overflow:hidden;position:relative}
+.svc .fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent2),var(--accent));width:0;transition:width .7s cubic-bezier(.2,.7,.2,1)}
+.svc .mn{width:62px;flex:none;text-align:right;font-family:var(--f-mono);font-weight:700;font-size:14px;color:var(--accent)}
+.svc .mn.u{color:var(--warn)}
+.quotes{margin-top:18px;display:flex;gap:18px}
+.qc{flex:1;border-left:3px solid var(--accent);padding:3px 0 3px 14px}
+.qc .qt{font-family:var(--f-display);font-style:italic;font-size:15px;line-height:1.35}
+.qc .qm{font-size:11px;color:var(--faint);margin-top:7px;font-family:var(--f-mono)}
+.exfoot{margin-top:auto;padding-top:16px;font-size:12.5px;color:var(--ink2);line-height:1.4;border-top:1px solid var(--panel-b)}
+.exfoot b{color:var(--ink)}
+.vriorow{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap}
+.vchip{font-family:var(--f-mono);font-size:11px;font-weight:700;padding:5px 11px;border-radius:7px;border:1px solid var(--panel-b);background:var(--panel)}
+.vchip.s{color:var(--good)} .vchip.t{color:var(--ink2)} .vchip.p{color:var(--warn)}
+
+/* domain detail metrics */
+.dmetrics{display:flex;gap:22px;margin-top:16px}
+.dcol{flex:1}
+.dcol h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;color:var(--accent);font-weight:700;margin-bottom:10px;text-transform:uppercase}
+.cagr{font-family:var(--f-display);font-size:26px;font-weight:600;color:var(--accent)}
+.cagr.u{color:var(--warn)}
+.tam{font-size:12.5px;color:var(--ink2);line-height:1.5;margin-top:6px}
+.tam b{color:var(--ink)}
+.plist{font-size:12.5px;color:var(--ink2);line-height:1.5}
+.plist .pk{font-family:var(--f-mono);color:var(--accent2);font-weight:700;margin-right:6px}
+.c3strip{display:flex;gap:8px;margin-top:4px}
+.c3cell{flex:1;text-align:center;padding:9px 4px;border-radius:9px;background:var(--panel);border:1px solid var(--panel-b);font-size:10.5px;color:var(--faint)}
+.c3cell b{display:block;font-size:16px;color:var(--ink);font-family:var(--f-mono);margin-top:3px}
+.c3cell.hd{background:linear-gradient(120deg,var(--accent),var(--accent2));border:none;flex:1.2}
+.c3cell.hd *{color:#07122a!important}.c3cell.hd b{font-size:20px}
+.c3cell.u b{color:var(--warn)}
+
+/* HEATMAP table */
+.heat{width:100%;border-collapse:separate;border-spacing:0 7px;margin-top:16px;font-size:13px}
+.heat th{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);
+  text-align:left;padding:0 12px 4px;font-weight:600}
+.heat td{padding:11px 12px;background:var(--panel);color:var(--ink2);vertical-align:middle}
+.heat td:first-child{border-radius:10px 0 0 10px;font-weight:700;color:var(--ink)}
+.heat td:last-child{border-radius:0 10px 10px 0}
+.pips{display:flex;gap:4px}
+.pip{width:22px;height:8px;border-radius:3px;background:var(--panel-b)}
+.pip.on{background:var(--accent)}
+.score-badge{font-family:var(--f-mono);font-weight:700;font-size:13px;color:var(--accent)}
+.score-badge.u{color:var(--warn)}
+
+/* MATRIX */
+.matrixbox{flex:1;display:flex;gap:30px;margin-top:18px;min-height:0}
+.plot{flex:1.3;position:relative;border-left:2px solid var(--panel-b);border-bottom:2px solid var(--panel-b);
+  margin:10px 10px 28px 48px}
+.plot .zone{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+.plot .zcell{border:1px dashed var(--panel-b);opacity:.5}
+.plot .pt{position:absolute;transform:translate(-50%,50%);display:flex;align-items:center;gap:8px;cursor:default}
+.plot .pt .d{width:15px;height:15px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg),0 0 16px var(--accent);transition:.3s}
+.plot .pt .lb{font-size:11.5px;font-weight:700;white-space:nowrap;background:var(--bg2);padding:3px 8px;border-radius:7px;border:1px solid var(--panel-b)}
+.plot .pt.hi .d{background:var(--accent2);transform:scale(1.3)}
+.axname{position:absolute;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--faint);font-weight:600}
+.axname.x{bottom:-24px;left:50%;transform:translateX(-50%)}
+.axname.y{top:50%;left:-40px;transform:rotate(-90deg) translateX(50%);transform-origin:left}
+.mlegend{flex:1;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.lz{display:flex;align-items:center;gap:11px;font-size:13px;color:var(--ink2)}
+.lz .sw2{width:16px;height:16px;border-radius:5px}
+.mcallout{padding:16px 18px;margin-top:6px}
+.mcallout .t{font-weight:700;color:var(--accent);font-size:15px}
+.mcallout .s{font-size:12.5px;color:var(--ink2);margin-top:6px;line-height:1.4}
+
+/* two score big */
+.twobig{display:flex;gap:26px;flex:1;margin-top:20px}
+.bigcard{flex:1;padding:26px 28px;display:flex;flex-direction:column}
+.bigcard .lab{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.bigcard .rows{margin:16px 0;display:flex;flex-direction:column;gap:9px}
+.bigcard .rw{display:flex;justify-content:space-between;font-size:13px;color:var(--ink2);padding-bottom:7px;border-bottom:1px solid var(--panel-b)}
+.bigcard .rw b{color:var(--ink);font-family:var(--f-mono)}
+.bigcard .big{font-family:var(--f-display);font-size:56px;font-weight:600;color:var(--accent);margin-top:auto;letter-spacing:-.02em}
+.bigcard .big span{font-size:24px;color:var(--faint)}
+
+/* roadmap */
+.road{display:flex;flex-direction:column;gap:0;margin-top:22px;flex:1;justify-content:center}
+.mile{display:flex;gap:20px;align-items:flex-start;padding:12px 0;position:relative}
+.mile .mk{flex:none;width:38px;height:38px;border-radius:50%;background:var(--panel);border:1px solid var(--panel-b);
+  color:var(--accent);font-family:var(--f-mono);font-weight:700;display:flex;align-items:center;justify-content:center;z-index:2}
+.mile:not(:last-child)::before{content:"";position:absolute;left:18px;top:42px;bottom:-6px;width:2px;background:var(--panel-b)}
+.mile .mt{font-weight:700;font-size:15px;width:260px;flex:none}
+.mile .md{font-size:13.5px;color:var(--ink2);line-height:1.4}
+.mile .mo{margin-left:auto;font-family:var(--f-mono);font-size:11px;color:var(--faint);white-space:nowrap}
+
+/* discussion */
+.disc{display:flex;flex-direction:column;gap:16px;margin-top:24px;flex:1;justify-content:center}
+.dcard{display:flex;gap:20px;align-items:center;padding:18px 22px;transition:.25s;cursor:default}
+.dcard:hover{border-color:var(--accent);transform:translateX(6px)}
+.dcard .dn{flex:none;font-family:var(--f-display);font-size:30px;font-weight:600;color:var(--accent);width:46px}
+.dcard .dt{font-weight:700;font-size:17px;width:280px;flex:none}
+.dcard .dd{font-size:14px;color:var(--ink2);line-height:1.4}
+
+.cap{margin-top:16px;padding:13px 18px;font-size:13px;line-height:1.45;color:var(--ink2);
+  background:var(--panel);border:1px solid var(--panel-b);border-radius:11px;border-left:3px solid var(--accent)}
+.cap b{color:var(--ink)}
+
+/* CLOSE */
+.close{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.close h1{font-family:var(--f-display);font-size:50px;font-weight:600;line-height:1.05;letter-spacing:-.02em}
+.close h1 em{font-style:italic;color:var(--accent)}
+.close p{font-size:17px;color:var(--ink2);margin-top:20px;max-width:46ch;line-height:1.5}
+.close .apx{margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.close .apx span{font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.08em;padding:8px 14px;
+  border-radius:999px;background:var(--panel);border:1px solid var(--panel-b);color:var(--ink2)}
+
+/* ===== CHROME ===== */
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  z-index:40;transition:width .4s;box-shadow:0 0 12px var(--accent)}
+.themebar{position:fixed;top:16px;right:20px;display:flex;gap:7px;z-index:40;padding:7px;border-radius:999px;
+  background:rgba(0,0,0,.25);backdrop-filter:blur(10px)}
+.sw{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:.2s}
+.sw:hover{transform:scale(1.15)} .sw.on{border-color:#fff;box-shadow:0 0 0 2px rgba(0,0,0,.3)}
+.sw.aurora{background:linear-gradient(135deg,#6ea8ff,#b58dff)}
+.sw.paper{background:linear-gradient(135deg,#b5641e,#2f7d6b)}
+.sw.signal{background:linear-gradient(135deg,#e2001a,#0a7a7a)}
+.sw.forest{background:linear-gradient(135deg,#4fd89a,#9fe870)}
+.sw.mono{background:linear-gradient(135deg,#e8e8ea,#77777c)}
+.nav{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:14px;align-items:center;z-index:40}
+.nav button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(160,160,160,.4);
+  background:rgba(0,0,0,.25);backdrop-filter:blur(10px);color:#fff;font-size:17px;cursor:pointer}
+.nav button:hover{background:rgba(255,255,255,.15)}
+.counter{font-family:var(--f-mono);font-size:12px;color:#cfd3e0;background:rgba(0,0,0,.25);backdrop-filter:blur(10px);
+  padding:8px 14px;border-radius:999px;min-width:66px;text-align:center}
+.dots{position:fixed;bottom:66px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:40}
+.dots .dt{width:7px;height:7px;border-radius:50%;background:rgba(150,150,150,.45);cursor:pointer;transition:.2s}
+.dots .dt.on{background:var(--accent);width:20px;border-radius:999px}
+.hintkey{position:fixed;bottom:22px;left:22px;font-family:var(--f-mono);font-size:11px;color:rgba(160,160,160,.6);z-index:40}
+</style>
+</head>
+<body data-theme="aurora">
+<div class="progress" id="prog"></div>
+
+<div id="stageWrap"><div class="stage" id="stage">
+
+<!-- 1 HERO -->
+<section class="slide active">
+  <div class="hero">
+    <div class="brandlock"><img src="bosch-logo.png" alt="Bosch"></div>
+    <div class="eyebrow"><span class="dot"></span>Bosch Engineering Consulting · MBA Company Project</div>
+    <h1>From internal expertise<br>to <em>external opportunities</em></h1>
+    <div class="q">Which services should Bosch take to which external customers first?</div>
+    <div class="rowmeta">
+      <div class="funnelmini"><span class="big">9</span><span>domains</span><span class="arr">→</span><span class="big2">2</span><span>GTM bets</span></div>
+      <div class="chip">MIDTERM REVIEW</div>
+    </div>
+    <div class="credit"><b>Hochschule Pforzheim MBA team</b> &nbsp;·&nbsp; Amit · Anchal · Chirag · Sanket &nbsp;·&nbsp; Supervisor Prof. Korbinian Eichner</div>
+  </div>
+  <div class="foot"><span>Working draft · November 2026</span><span>↔ arrows to move · swatches top-right to switch theme</span></div>
+</section>
+
+<!-- 2 FUNNEL (interactive) -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>How we decide · <span style="color:var(--ink2)">click a gate</span></div>
+  <h1 class="title">Capability <em>gates</em>, the market <em>ranks</em></h1>
+  <div class="funnelflow">
+    <div class="fcol domains"><div class="fk">9</div><div class="fn">domains enter</div></div>
+    <div class="fchev">›</div>
+    <div class="fcol gate" data-gate="0"><div class="fk">C1</div><div class="fn">Capability</div></div>
+    <div class="fchev">›</div>
+    <div class="fcol gate" data-gate="1"><div class="fk">C2</div><div class="fn">Transferability</div></div>
+    <div class="fchev">›</div>
+    <div class="fcol gate" data-gate="2"><div class="fk">C3</div><div class="fn">Market pull</div></div>
+    <div class="fchev">›</div>
+    <div class="fcol out"><div class="fk">2</div><div class="fn">GTM bets</div></div>
+  </div>
+  <div class="gatedetail panel" id="gateDetail"></div>
+  <div class="foot"><span>C1 + C2 are the gate; C3 ranks the survivors. Adapted from Unit 1/Unit 2 methods; Bosch sequence is our adaptation.</span><span>02</span></div>
+</section>
+
+<!-- 3 FINDINGS -->
+<section class="slide" data-countup>
+  <div class="eyebrow"><span class="dot"></span>Where we stand</div>
+  <h1 class="title">Three findings <em>guide the next GTM decisions</em></h1>
+  <div class="statrow">
+    <div class="statcard panel"><div class="n" data-to="7">0</div><div class="l">completed internal interviews</div></div>
+    <div class="statcard panel"><div class="n" data-to="9">0</div><div class="l">domains considered in WP1</div></div>
+    <div class="statcard panel"><div class="n" data-to="15">0</div><div class="l">combination entries, overlapping scope</div></div>
+    <div class="statcard panel"><div class="n" data-to="4">0</div><div class="l">market reports in the C3 package</div></div>
+  </div>
+  <div class="findrow">
+    <div class="find"><div class="fb">01</div><div class="ft">Service evidence comes first</div><div class="fd">Five internal KPIs inform the C1 + C2 gate for a named service.</div></div>
+    <div class="find"><div class="fb">02</div><div class="ft">C3 research is selective</div><div class="fd">Compare the same scope on both axes. Four reports cover six domains.</div></div>
+    <div class="find"><div class="fb">03</div><div class="ft">Buyer evidence shapes the two bets</div><div class="fd">The 2.00–2.17 market-score range needs buyer, access and delivery validation.</div></div>
+  </div>
+  <div class="foot"><span>Sources: I1–I7 internal method 1.5.0; R1–R4 market method 2.0.0</span><span>03</span></div>
+</section>
+
+<!-- (method now replaced by the interactive funnel above) -->
+
+<!-- 4 WP1 KPIs -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>WP1 · The capability lens</div>
+  <h1 class="title">Five KPIs decide the gate</h1>
+  <div class="lede">Four build <b style="color:var(--ink)">C1 capability</b>; the fifth is <b style="color:var(--ink)">C2 transferability</b> - the decisive, honest signal. Each weighs 20%; any Unknown blocks the mean.</div>
+  <div class="kpigrid">
+    <div class="kpi panel"><div class="kn">1</div><div><div class="kt">Delivered work</div><div class="kd">Work personally completed, with clear outputs.</div></div><div class="tagc">C1</div></div>
+    <div class="kpi panel"><div class="kn">2</div><div><div class="kt">Relevant expertise</div><div class="kd">The expert's own skills needed for the work.</div></div><div class="tagc">C1</div></div>
+    <div class="kpi panel"><div class="kn">3</div><div><div class="kt">Delivery method</div><div class="kd">Steps, tools and materials to repeat delivery.</div></div><div class="tagc">C1</div></div>
+    <div class="kpi panel"><div class="kn">4</div><div><div class="kt">Defined service</div><div class="kd">Problem, work, outputs, result, responsibilities.</div></div><div class="tagc">C1</div></div>
+    <div class="kpi panel" style="grid-column:1/3;border-color:var(--accent)"><div class="kn" style="color:var(--accent2)">5</div><div><div class="kt">External transfer</div><div class="kd">Evidence of use outside Bosch, or named adaptations and client conditions - the gate's sharpest question.</div></div><div class="tagc" style="color:var(--accent)">C2</div></div>
+  </div>
+  <div class="foot"><span>Source: internal assessment method 1.5.0, §4 · 1–3 scale · C1 + C2 is not two averaged halves added</span><span>04</span></div>
+</section>
+
+<!-- 5 WP1 EXPLORER -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>WP1 · Seven interviews · <span style="color:var(--ink2)">click an expert</span></div>
+  <h1 class="title" style="font-size:34px">Inside the capability evidence</h1>
+  <div class="exwrap">
+    <div class="exnav" id="expertNav"></div>
+    <div class="expanel panel" id="expertPanel"></div>
+  </div>
+  <div class="foot"><span>I1–I7 · method 1.5.0 · service scores, not person ratings · U = Unknown blocks the mean</span><span>05</span></div>
+</section>
+
+<!-- 6 HEATMAP -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>WP1 · Consolidated view</div>
+  <h1 class="title">Seven domains now carry scored services</h1>
+  <table class="heat">
+    <thead><tr><th style="width:230px">Domain</th><th>Capability signal</th><th style="width:150px">Reported score(s)</th><th>Named service evidence</th></tr></thead>
+    <tbody id="heatBody"></tbody>
+  </table>
+  <div class="cap">Functional Safety and Restructuring have no standalone score yet. Next: group matching services, reconcile evidence, apply the same anchors.</div>
+  <div class="foot"><span>Source: I1–I7 §§2–3 · U = incomplete · no domain averages calculated</span><span>06</span></div>
+</section>
+
+<!-- 7 COMBINATIONS -->
+<section class="slide" data-countup>
+  <div class="eyebrow"><span class="dot"></span>WP1 · Combinations</div>
+  <h1 class="title">Services cluster <em>around shared customer problems</em></h1>
+  <div class="statrow">
+    <div class="statcard panel"><div class="n" data-to="15">0</div><div class="l">combination entries across seven reports</div></div>
+    <div class="statcard panel"><div class="n" data-to="3" style="color:var(--good)">0</div><div class="l">delivered together</div></div>
+    <div class="statcard panel"><div class="n" data-to="8">0</div><div class="l">current joint work</div></div>
+    <div class="statcard panel"><div class="n" data-to="4" style="color:var(--faint)">0</div><div class="l">proposed only</div></div>
+  </div>
+  <div class="findrow">
+    <div class="find"><div class="fb" style="color:var(--good)">✓</div><div class="ft">Agile setup + PM continuation</div><div class="fd">Delivered together - joint score 2.20 / 3 (the only complete one).</div></div>
+    <div class="find"><div class="fb" style="color:var(--warn)">~</div><div class="ft">SPICE readiness + process redesign</div><div class="fd">Current joint work - joint score still Unknown.</div></div>
+    <div class="find"><div class="fb" style="color:var(--warn)">~</div><div class="ft">Leadership alignment + behaviour change</div><div class="fd">Current joint work - joint score still Unknown.</div></div>
+  </div>
+  <div class="cap">Only 1 of 15 entries has a complete numerical assessment - so selective market research is a deliberate scope decision, not a gap.</div>
+  <div class="foot"><span>Source: I1–I7 §§2–3 · entries overlap · joint market research not yet undertaken</span><span>07</span></div>
+</section>
+
+<!-- 8 WP2 KPIs -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>WP2 · The market lens</div>
+  <h1 class="title">Six KPIs rank the passed scope</h1>
+  <div class="lede">Five assess the market; the sixth is <b style="color:var(--ink)">fit with Bosch</b>. Each weighs 1/6. Worked example reaches <b style="color:var(--ink)">C3 = (2+2+3+2+2+2)/6 = 2.17</b>.</div>
+  <div class="kpigrid">
+    <div class="kpi panel"><div class="kn">1</div><div><div class="kt">Market size</div><div class="kd">Sourced size for the service and region.</div></div></div>
+    <div class="kpi panel"><div class="kn">2</div><div><div class="kt">Market growth</div><div class="kd">Sourced yearly growth in the target geography.</div></div></div>
+    <div class="kpi panel"><div class="kn">3</div><div><div class="kt">Demand pull</div><div class="kd">Tenders, buyer requirements - real signals.</div></div></div>
+    <div class="kpi panel"><div class="kn">4</div><div><div class="kt">Access for a new entrant</div><div class="kd">Can a no-brand supplier reach buyers?</div></div></div>
+    <div class="kpi panel"><div class="kn">5</div><div><div class="kt">Need for an external provider</div><div class="kd">Outside support vs in-house, offshore, automation.</div></div></div>
+    <div class="kpi panel" style="border-color:var(--accent)"><div class="kn" style="color:var(--accent2)">6</div><div><div class="kt">Fit with Bosch</div><div class="kd">Do buyers value engineering/standards rigour?</div></div></div>
+  </div>
+  <div class="foot"><span>Sources: R1–R4 §6.5 method 2.0.0 · neighbouring-market evidence caps size and growth at 2</span><span>08</span></div>
+</section>
+
+<!-- 9 WP2 EXPLORER -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>WP2 · Six market reports · <span style="color:var(--ink2)">click a domain</span></div>
+  <h1 class="title" style="font-size:34px">Inside the market attractiveness</h1>
+  <div class="exwrap">
+    <div class="exnav" id="domNav"></div>
+    <div class="expanel panel" id="domPanel"></div>
+  </div>
+  <div class="foot"><span>R1–R4 · supplied-report estimates and analyst synthesis · proxies ≠ addressable market</span><span>09</span></div>
+</section>
+
+<!-- 10 SHORTLIST -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>WP2 · Scoped synthesis</div>
+  <h1 class="title">Comparable scopes & buyer access <em>decide the shortlist</em></h1>
+  <table class="heat">
+    <thead><tr><th style="width:280px">Domain / service</th><th style="width:120px">C3 / 3</th><th>Next evidence before selection</th></tr></thead>
+    <tbody>
+      <tr><td>Agile / Product Leadership</td><td><span class="score-badge">2.00</span></td><td>Test the buyer and outcome for the named engineering-agile service.</td></tr>
+      <tr><td>ASPICE / ISO 9001 audit</td><td><span class="score-badge">2.17 / 2.17</span></td><td>Keep offers separate; check qualifications, access, independence.</td></tr>
+      <tr><td>Change Management</td><td><span class="score-badge">2.17</span></td><td>Identify who pays for engineering-change support and why.</td></tr>
+      <tr><td>Process Management: IPD</td><td><span class="score-badge u">Unknown</span></td><td>Find the buyer, budget owner and route to purchase.</td></tr>
+      <tr><td>Project / Program / Portfolio</td><td><span class="score-badge">2.00</span></td><td>Test paid demand for engineering project control vs staffing.</td></tr>
+      <tr><td>Restructuring / Performance</td><td><span class="score-badge">2.17</span></td><td>Establish matching delivery proof and transfer conditions.</td></tr>
+    </tbody>
+  </table>
+  <div class="cap">The 2.00–2.17 range alone does not name a winner. <b>Compare only scopes admitted through the gate.</b></div>
+  <div class="foot"><span>Sources: R1–R4 §6 · six domains, seven assessments · IPD has no complete mean</span><span>10</span></div>
+</section>
+
+<!-- 11 MATRIX -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>Selection · Market pull × Internal capability</div>
+  <h1 class="title">Where the scored domains land</h1>
+  <div class="matrixbox">
+    <div class="plot" id="plot">
+      <div class="zone">
+        <div class="zcell"></div><div class="zcell"></div><div class="zcell"></div>
+        <div class="zcell"></div><div class="zcell"></div><div class="zcell"></div>
+        <div class="zcell"></div><div class="zcell"></div><div class="zcell"></div>
+      </div>
+      <div class="axname x">Internal capability (C1+C2) →</div>
+      <div class="axname y">Market pull (C3) →</div>
+    </div>
+    <div class="mlegend">
+      <div class="lz"><span class="sw2" style="background:var(--good)"></span>Attractive → pursue / invest</div>
+      <div class="lz"><span class="sw2" style="background:var(--warn)"></span>Potential → build / test</div>
+      <div class="lz"><span class="sw2" style="background:var(--bad)"></span>No-go → defer / deprioritise</div>
+      <div class="mcallout panel"><div class="t">ISO 9001 internal audit</div><div class="s">2.80 capability × 2.17 market - strong capability, medium pull → <b>selective pursuit</b>. Next: test buyer demand and fees. Illustrative; gate not yet assigned.</div></div>
+    </div>
+  </div>
+  <div class="cap">Equal thirds are proposed portfolio bands, not gate cutoffs. IPD market is Unknown; Restructuring capability is not yet scored.</div>
+  <div class="foot"><span>Adapted from Unit 2 Methods (Pfeiffer / St. Gallen) · scores from I-/R- assessments</span><span>11</span></div>
+</section>
+
+<!-- 12 END TO END -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>End-to-end example · ISO 9001 internal audit</div>
+  <h1 class="title">One service, both scores, ready to compare</h1>
+  <div class="twobig">
+    <div class="bigcard panel">
+      <div class="lab">Internal strength - five dimensions</div>
+      <div class="rows">
+        <div class="rw">Delivered work <b>3</b></div><div class="rw">Relevant expertise <b>3</b></div>
+        <div class="rw">Delivery method <b>3</b></div><div class="rw">Defined service <b>3</b></div>
+        <div class="rw">External transfer <b>2</b></div>
+      </div>
+      <div class="big">2.80<span> / 3 · 14/5</span></div>
+    </div>
+    <div class="bigcard panel">
+      <div class="lab">Market attractiveness - six KPIs</div>
+      <div class="rows">
+        <div class="rw">Market size <b>2</b></div><div class="rw">Market growth <b>2</b></div>
+        <div class="rw">Demand pull <b>3</b></div><div class="rw">Access for a new entrant <b>2</b></div>
+        <div class="rw">Need for an external provider <b>2</b></div><div class="rw">Fit with Bosch <b>2</b></div>
+      </div>
+      <div class="big" style="color:var(--accent2)">2.17<span> / 3 · 13/6</span></div>
+    </div>
+  </div>
+  <div class="cap">C1 + C2 score → <b>recorded gate pass</b> → C3 score → comparison. The flow is the deliverable, not this illustrative point.</div>
+  <div class="foot"><span>Sources: I3 §§2,5; R2 pp.13–14 · market = 13/6 = 2.1667</span><span>12</span></div>
+</section>
+
+<!-- 13 ROADMAP -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>Way forward</div>
+  <h1 class="title">The remaining work leads to <em>two concrete GTM packages</em></h1>
+  <div class="road">
+    <div class="mile"><div class="mk">1</div><div class="mt">Close midterm decisions</div><div class="md">Agreed C1 + C2 pass rule, scope and validation route.</div><div class="mo">Coordinator</div></div>
+    <div class="mile"><div class="mk">2</div><div class="mt">Complete comparable evidence</div><div class="md">Recorded gate outcomes and C3 evidence for passed scopes.</div><div class="mo">Domain owners + reviewer</div></div>
+    <div class="mile"><div class="mk">3</div><div class="mt">Select & deepen two use cases</div><div class="md">Selection rationale, buyer evidence or stated proxy limits.</div><div class="mo">Team + Bosch</div></div>
+    <div class="mile"><div class="mk">4</div><div class="mt">Develop GTM packages</div><div class="md">Customer, offer, differentiation, sales route, economics.</div><div class="mo">Use-case owners</div></div>
+    <div class="mile"><div class="mk">5</div><div class="mt">Prepare final recommendations</div><div class="md">90-day actions and 12–18-month scaling conditions.</div><div class="mo">Coordinator + team</div></div>
+  </div>
+  <div class="cap"><b>Validation to agree:</b> the brief calls for 15–20 external discovery interviews; the kickoff permits qualified proxies where direct validation has not occurred.</div>
+  <div class="foot"><span>Sources: P1 pp.4–6; P2 p.24 · owners, dates and external-discovery status need team confirmation</span><span>13</span></div>
+</section>
+
+<!-- 14 DISCUSSION -->
+<section class="slide">
+  <div class="eyebrow"><span class="dot"></span>Discussion · 30–45 minutes</div>
+  <h1 class="title">Four decisions <em>focus the next phase</em></h1>
+  <div class="disc">
+    <div class="dcard panel"><div class="dn">01</div><div class="dt">Comparison unit</div><div class="dd">Keep the nine domain headings and compare matched service / use-case records.</div></div>
+    <div class="dcard panel"><div class="dn">02</div><div class="dt">Method & progression</div><div class="dd">Agree the C1 + C2 pass rule, transfer conditions and the resulting C3 research scope.</div></div>
+    <div class="dcard panel"><div class="dn">03</div><div class="dt">Validation & combinations</div><div class="dd">Agree the buyer / proxy route and selective research for combinations that could change selection.</div></div>
+    <div class="dcard panel"><div class="dn">04</div><div class="dt">Final delivery expectations</div><div class="dd">Confirm the depth of two GTM packages, milestones, owners and Bosch support.</div></div>
+  </div>
+  <div class="foot"><span>Record each outcome with rationale, owner and date · endorsing the approach is separate from approving an offer</span><span>14</span></div>
+</section>
+
+<!-- 15 CLOSE -->
+<section class="slide">
+  <div class="close">
+    <div class="eyebrow" style="justify-content:center;margin-bottom:22px"><span class="dot"></span>Thank you</div>
+    <h1>Evidence first.<br>Then <em>two bets worth making.</em></h1>
+    <p>Capability gates, the market ranks, and buyers decide. We are ready to agree the pass rule and name the two use cases.</p>
+    <div class="apx"><span>I1–I7 interviews</span><span>R1–R4 market reports</span><span>MF Functional Safety (legacy)</span><span>Methods 1.5.0 / 2.0.0</span></div>
+  </div>
+  <div class="foot"><span>Hochschule Pforzheim MBA team · Bosch Engineering Consulting · Working draft</span><span>15</span></div>
+</section>
+
+</div></div>
+
+<div class="dots" id="dots"></div>
+<div class="nav">
+  <button id="prev">‹</button><span class="counter" id="counter">1 / 15</span><button id="next">›</button>
+</div>
+<div class="hintkey">← → navigate</div>
+
+<script>
+/* ---------- DATA ---------- */
+const gates=[
+ {tag:"C1 · Capability",name:"Does the service really exist inside Bosch?",
+  body:"Four KPIs establish whether the expert has actually delivered the service - with the right skills, a repeatable method and a clearly defined scope. This is the depth half of the gate.",
+  kpis:["Delivered work","Relevant expertise","Delivery method","Defined service"],
+  rule:"Rated 1–3. A thin, aspirational or slide-only capability cannot pass the gate."},
+ {tag:"C2 · Transferability",name:"Does it survive outside Bosch?",
+  body:"The single decisive KPI. Evidence of use beyond Bosch, or the named adaptations and client conditions required. Internal standing, the word-of-mouth network and Bosch system access do not travel with the offer.",
+  kpis:["External transfer"],
+  rule:"The sharpest gate signal: a service locked to Bosch access fails regardless of how strong C1 is."},
+ {tag:"C3 · Market pull",name:"For survivors: how attractive is the market?",
+  body:"Only services that clear the C1 + C2 gate are researched. Six market KPIs then rank the survivors on size, growth, real buyer demand, entrant access, the need for an outside provider, and fit with the Bosch brand.",
+  kpis:["Size","Growth","Demand pull","Access","External need","Bosch fit"],
+  rule:"C3 begins only after a recorded gate pass - market size never overrides a failed gate."}
+];
+function renderGate(idx){
+  document.querySelectorAll('.fcol.gate').forEach((g,k)=>g.classList.toggle('on',k===idx));
+  const g=gates[idx];
+  document.getElementById('gateDetail').innerHTML=
+   `<div class="gleft"><div class="gtag">${g.tag}</div><div class="gname">${g.name}</div></div>
+    <div class="gbody"><p>${g.body}</p><div class="gkpis">${g.kpis.map(k=>`<span class="gchip">${k}</span>`).join('')}</div><div class="grule">${g.rule}</div></div>`;
+}
+function buildGates(){
+  document.querySelectorAll('.fcol.gate').forEach(g=>g.onclick=()=>renderGate(+g.dataset.gate));
+}
+
+const experts=[
+ {nm:"Stefan Sickert",sub:"Component development PM",date:"13 Oct 2026",
+  head:"Repeatable PM; external transfer is bounded",
+  svc:[{n:"Component development project management",s:2.80}],
+  q:[["I'm able to run this project successfully because I know the procedures.","¶44 · 36:44"],
+     ["if it's similar to what we are doing - not in volume, but in technology","¶74 · 1:07:53"]],
+  vrio:[["Value",2],["Rarity",1],["Imitability",1],["Organisation",0]],
+  foot:"Gate review: define the PM technology scope, specialist access and external delivery conditions."},
+ {nm:"Eva Zeeb",sub:"Change & process alignment",date:"19 Oct 2026",
+  head:"Change support works alongside a concrete transformation",
+  svc:[{n:"Change implementation support",s:2.60},{n:"Process definition and alignment",s:2.40}],
+  q:[["Change management standalone doesn't make sense. It has to accompany something.","¶189 · 38:16"],
+     ["Ten divisions did it 10 times differently.","¶21 · 4:15"]],
+  vrio:[["Value",2],["Rarity",1],["Imitability",1],["Organisation",0]],
+  foot:"Gate review: define the business change, adoption outcome and sponsor before packaging."},
+ {nm:"Valeria Franzitta",sub:"ISO 9001 audit · IPD consulting",date:"20 Oct 2026",
+  head:"Audit delivery is well defined; consulting needs a separate scope",
+  svc:[{n:"ISO 9001 internal audit delivery",s:2.80},{n:"Product development process consulting",s:2.40}],
+  q:[["I support them since two years, they are happy, they ask for me.","¶20 · 9:09"],
+     ["when we provide auditing services, we are not doing the consulting","¶107 · 40:01"]],
+  vrio:[["Value",2],["Rarity",1],["Imitability",1],["Organisation",0]],
+  foot:"Gate review: retain the ISO 9001 audit scope; verify qualifications, capacity and independence."},
+ {nm:"Bernd Wawczyniak",sub:"Agile enablement · Org design",date:"23 Oct 2026",
+  head:"Agile enablement has a path; sponsorship conditions success",
+  svc:[{n:"Agile team setup and coaching",s:2.60},{n:"Organisation diagnosis and design",s:2.40}],
+  q:[["you need to have a clear mandate and a sponsor.","¶55 · 21:06"],
+     ["this narrative needs to be anonymized or more abstract.","¶90 · 41:55"]],
+  vrio:[["Value",2],["Rarity",1],["Imitability",1],["Organisation",0]],
+  foot:"Gate review: separate short agile enablement from PM continuation; confirm sponsor and handover."},
+ {nm:"Michael-N. Müller",sub:"PM · change · lean",date:"28 Oct 2026",
+  head:"PM and change bounded; lean delivery incomplete",
+  svc:[{n:"Development project management",s:2.20},{n:"Organisational change support",s:2.20},{n:"Lean office-workflow improvement",s:null}],
+  q:[["you have to lead people without having the power. I'm not the boss.","¶108 · 36:07"],
+     ["At the end, we didn't get the order.","¶137 · 49:23"]],
+  vrio:[["Value",1],["Rarity",1],["Imitability",1],["Organisation",0]],
+  foot:"Gate review: clarify scored PM/change scopes; keep lean incomplete until delivery and transfer evidenced."},
+ {nm:"Manuel Arndt",sub:"Scaled agile planning",date:"30 Oct 2026",
+  head:"Scaled agile planning is the supported core",
+  svc:[{n:"Scaled agile planning and flow coaching",s:2.60},{n:"AI adoption and leadership support",s:null},{n:"Risk and impediment management",s:null}],
+  q:[["we as consultants need to gain access there.","¶135 · 46:09"],
+     ["an increase in quality or a decrease in lead times - this needs to be shown.","¶152 · 51:16"]],
+  vrio:[["Value",1],["Rarity",1],["Imitability",1],["Organisation",0]],
+  foot:"Gate review: assess the agile core separately; resolve external access and outcome evidence."},
+ {nm:"Lars Schaab",sub:"Leadership · pre-audit",date:"4 Nov 2026",
+  head:"Leadership assessable; Bosch-specific pre-audit faces a transfer barrier",
+  svc:[{n:"Leadership team development",s:2.20},{n:"Bosch management-system pre-audit (transfer = 1)",s:2.20},{n:"Plant change-agent training",s:null}],
+  q:[["Essential is that the leadership team is behind the transformation.","¶15 · 3:55"],
+     ["I checked if I with AI had access to all these central directives.","¶43 · 23:32"]],
+  vrio:[["Value",2],["Rarity",1],["Imitability",1],["Organisation",0]],
+  foot:"Gate review: treat leadership and pre-audit separately; adapt the Bosch-specific baseline before external use."}
+];
+
+const domains=[
+ {nm:"Agile / Product Leadership",c3:"2.00",kpis:[["Size",2],["Growth",2],["Demand",2],["Access",2],["Ext. need",2],["Bosch fit",2]],
+  cagr:"10.67%",cagrsub:"2025–2032",tam:"<b>$7.68bn → $15.63bn</b> global agile-consulting proxy (360iResearch/GII). Industrial subset unsized.",
+  pestle:[["T","AI & software complexity raise outcome pressure"],["S","Agile roles shift into product/engineering teams"],["L","Standards shape delivery; don't mandate agile"]],
+  porter:"High rivalry, easy generic entry, strong substitutes (in-house, freelancers, AI) and high buyer power.",
+  next:"Test engineering-agile work with a named buyer and measurable flow or quality outcomes."},
+ {nm:"ASPICE / Audits",c3:"2.17",kpis:[["Size",2],["Growth",2],["Demand",3],["Access",2],["Ext. need",2],["Bosch fit",2]],
+  cagr:"9.6%",cagrsub:"ASPICE 2025–2034",tam:"ASPICE <b>$1.8bn → $4.1bn</b> (Dataintelo). ISO 9001 audit market not directly sized; QMS proxy 4.9%.",
+  pestle:[["S","Restructuring releases experienced quality staff"],["T","Software complexity & AI change process assurance"],["L","ASPICE is buyer-led; ISO need ≠ outsourced demand"]],
+  porter:"High/very-high rivalry; ASPICE credentials gate entry while ISO is easier; buyer power high, specialist supply accessible.",
+  next:"Test ASPICE readiness and ISO internal audit separately, with qualification and independence checks."},
+ {nm:"Change Management",c3:"2.17",kpis:[["Size",3],["Growth",2],["Demand",2],["Access",2],["Ext. need",2],["Bosch fit",2]],
+  cagr:"9.02%",cagrsub:"2025–2031",tam:"<b>$1.96bn → $3.29bn</b> change-consulting (Mordor). Publisher range $1.63–8.46bn signals scope uncertainty.",
+  pestle:[["P","Trade & EV-policy uncertainty trigger adaptation"],["S","Change fatigue & workforce cuts hinder adoption"],["T","AI creates change needs and automates analysis"]],
+  porter:"Rivalry unrated; few formal entry barriers but relationships constrain; high substitutes and buyer power.",
+  next:"Test who funds engineering-change support and which adoption outcome justifies a separate fee."},
+ {nm:"Process Mgmt: IPD",c3:"U",kpis:[["Size",2],["Growth",2],["Demand",2],["Access","U"],["Ext. need",2],["Bosch fit",2]],
+  cagr:"7.8%",cagrsub:"proxy 2025–2034",tam:"<b>$44.9bn → $87.5bn</b> product-development proxy (Dataintelo) - far broader than IPD process consulting.",
+  pestle:[["E","R&D cost & time-to-market pressure create needs"],["S","Internal process ownership constrains external roles"],["T","PLM, AI & shorter cycles reshape process work"]],
+  porter:"High rivalry (engineering firms, integrators); references decisive; strong substitutes incl. offshore.",
+  next:"Identify the IPD buyer, budget owner and purchasing route before completing the market score."},
+ {nm:"Project / Program / Portfolio",c3:"2.00",kpis:[["Size",2],["Growth",2],["Demand",2],["Access",2],["Ext. need",2],["Bosch fit",2]],
+  cagr:"12.6%",cagrsub:"2025–2031",tam:"<b>$8.64bn → $17.75bn</b> PPM tools + services (MarketsandMarkets) - exceeds consulting-only scope.",
+  pestle:[["P","Infrastructure & defence investment are adjacent demand"],["S","PM talent shortages don't prove consulting purchases"],["T","AI automates admin; judgement gains value"]],
+  porter:"High rivalry and easy generic entry; engineering trust is the harder barrier; in-house PMOs & AI substitute.",
+  next:"Test demand for engineering project control - buyer access, measurable value and a viable fee."},
+ {nm:"Restructuring / Performance",c3:"2.17",kpis:[["Size",2],["Growth",2],["Demand",3],["Access",2],["Ext. need",2],["Bosch fit",2]],
+  cagr:"+7%/yr",cagrsub:"one-year, not CAGR",tam:"Operations-consulting proxy <b>$74.73bn</b> (2025). Illustrative index 100→116→140 at 0/3/7% per year.",
+  pestle:[["E","Industrial distress & cost pressure create demand"],["S","Workforce reductions raise implementation difficulty"],["T","AI & automation drive productivity programmes"]],
+  porter:"Rivalry unrated; operational references differ from lender credibility; high substitutes and buyer power.",
+  next:"Document a completed operational-improvement scope and transfer conditions for gate review."}
+];
+
+const heatRows=[
+ ["Agile / Product Leadership",2.60,"2.60; 2.60","Agile team setup; scaled agile planning & flow coaching"],
+ ["ASPICE / Audits",2.80,"2.80; 2.20","ISO 9001 audit; Bosch-system pre-audit (transfer = 1)"],
+ ["Functional Safety",0,"-","Team references and a proposed combination"],
+ ["Leadership Enabling",2.20,"2.20","Leadership team development for volatile conditions"],
+ ["Organisation Design / Culture",2.40,"2.40","Organisation diagnosis and design"],
+ ["Change Management",2.60,"2.60; 2.20; U","Change support; AI adoption & plant enablement"],
+ ["Process Management",2.40,"2.40; 2.40; U","IPD consulting; alignment; lean & handover diagnosis"],
+ ["Project / Program / Portfolio",2.80,"2.80; 2.20; U","Development PM; risk ops & plant-sale leadership"],
+ ["Restructuring / Performance",0,"-","Joint and proposed use cases"]
+];
+
+const matrixPts=[
+ {nm:"Agile / PL",x:2.60,y:2.00},{nm:"ASPICE / ISO",x:2.80,y:2.17},
+ {nm:"Change Mgmt",x:2.60,y:2.17},{nm:"PPM",x:2.80,y:2.00}
+];
+
+/* ---------- RENDER explorers ---------- */
+const vrioLabel={2:["s","supported"],1:["t","test needed"],0:["p","partial"]};
+function renderExpert(idx){
+  const e=experts[idx];
+  document.querySelectorAll('#expertNav .exbtn').forEach((b,k)=>b.classList.toggle('on',k===idx));
+  const svc=e.svc.map(s=>{
+    const pct=s.s?Math.round((s.s/3)*100):0;
+    return `<div class="svc"><div class="snm">${s.n}</div><div class="track"><div class="fill" data-w="${pct}"></div></div><div class="mn ${s.s?'':'u'}">${s.s?s.s.toFixed(2):'U'}</div></div>`;
+  }).join('');
+  const q=e.q.map(x=>`<div class="qc"><div class="qt">"${x[0]}"</div><div class="qm">${x[1]}</div></div>`).join('');
+  const letters=["V","R","I","O"];
+  const vr=e.vrio.map((v,k)=>{const L=vrioLabel[v[1]];return `<div class="vchip ${L[0]}">${letters[k]} · ${v[0]} - ${L[1]}</div>`}).join('');
+  document.getElementById('expertPanel').innerHTML=
+   `<div class="exhead"><h3>${e.head}</h3><div class="meta">${e.nm}<br>${e.date}</div></div>
+    <div class="svcscore">${svc}</div>
+    <div class="quotes">${q}</div>
+    <div class="vriorow">${vr}</div>
+    <div class="exfoot"><b>→</b> ${e.foot}</div>`;
+  requestAnimationFrame(()=>document.querySelectorAll('#expertPanel .fill').forEach(f=>f.style.width=f.dataset.w+'%'));
+}
+function buildExpertNav(){
+  document.getElementById('expertNav').innerHTML=experts.map((e,k)=>
+   `<button class="exbtn" data-k="${k}"><div class="nm">${e.nm}</div><div class="sub">${e.sub}</div></button>`).join('');
+  document.querySelectorAll('#expertNav .exbtn').forEach(b=>b.onclick=()=>renderExpert(+b.dataset.k));
+}
+function renderDomain(idx){
+  const d=domains[idx];
+  document.querySelectorAll('#domNav .exbtn').forEach((b,k)=>b.classList.toggle('on',k===idx));
+  const strip=`<div class="c3cell hd">C3<b>${d.c3==='U'?'Unknown':d.c3}</b></div>`+
+    d.kpis.map(k=>`<div class="c3cell ${k[1]==='U'?'u':''}">${k[0]}<b>${k[1]}</b></div>`).join('');
+  const pe=d.pestle.map(p=>`<div class="plist"><span class="pk">${p[0]}</span>${p[1]}</div>`).join('');
+  document.getElementById('domPanel').innerHTML=
+   `<div class="exhead"><h3>${d.nm}</h3></div>
+    <div class="c3strip">${strip}</div>
+    <div class="dmetrics">
+      <div class="dcol"><h4>Growth</h4><div class="cagr ${d.c3==='U'?'u':''}">${d.cagr}</div><div class="tam">${d.cagrsub}<br>${d.tam}</div></div>
+      <div class="dcol"><h4>PESTLE signals</h4>${pe}</div>
+      <div class="dcol"><h4>Industry structure</h4><div class="plist">${d.porter}</div></div>
+    </div>
+    <div class="exfoot"><b>If admitted →</b> ${d.next}</div>`;
+}
+function buildDomNav(){
+  document.getElementById('domNav').innerHTML=domains.map((d,k)=>
+   `<button class="exbtn" data-k="${k}"><div class="nm">${d.nm}</div><div class="sub">C3 ${d.c3==='U'?'Unknown':d.c3}</div></button>`).join('');
+  document.querySelectorAll('#domNav .exbtn').forEach(b=>b.onclick=()=>renderDomain(+b.dataset.k));
+}
+function buildHeat(){
+  document.getElementById('heatBody').innerHTML=heatRows.map(r=>{
+    const lvl=r[1]?Math.round(((r[1]-1)/2)*4):0;
+    const pips=[0,1,2,3].map(i=>`<span class="pip ${i<lvl?'on':''}"></span>`).join('');
+    const sc=r[2]==='-'?`<span class="score-badge u">-</span>`:`<span class="score-badge">${r[2]}</span>`;
+    return `<tr><td>${r[0]}</td><td><div class="pips">${pips}</div></td><td>${sc}</td><td style="font-size:12px">${r[3]}</td></tr>`;
+  }).join('');
+}
+function buildMatrix(){
+  const plot=document.getElementById('plot');
+  const map=v=>((v-1)/2)*100;
+  matrixPts.forEach(p=>{
+    const el=document.createElement('div');el.className='pt';
+    el.style.left=map(p.x)+'%';el.style.bottom=map(p.y)+'%';
+    el.innerHTML=`<span class="d"></span><span class="lb">${p.nm}</span>`;
+    el.onmouseenter=()=>el.classList.add('hi');el.onmouseleave=()=>el.classList.remove('hi');
+    plot.appendChild(el);
+  });
+}
+
+/* ---------- count-up ---------- */
+function countUp(slide){
+  slide.querySelectorAll('[data-to]').forEach(el=>{
+    const to=+el.dataset.to;let s=0;const step=Math.max(1,Math.round(to/26));
+    el.textContent='0';const t=setInterval(()=>{s+=step;if(s>=to){s=to;clearInterval(t)}el.textContent=s;},26);
+  });
+}
+
+/* ---------- nav / theme / fit ---------- */
+const wrap=document.getElementById('stageWrap');
+function fit(){const s=Math.min(window.innerWidth/1280,window.innerHeight/720)*0.97;wrap.style.transform='scale('+s+')';}
+addEventListener('resize',fit);fit();
+
+const slides=[...document.querySelectorAll('.slide')];let i=0;
+const counter=document.getElementById('counter'),prog=document.getElementById('prog');
+const dots=document.getElementById('dots');
+dots.innerHTML=slides.map((_,k)=>`<span class="dt" data-k="${k}"></span>`).join('');
+dots.querySelectorAll('.dt').forEach(d=>d.onclick=()=>show(+d.dataset.k));
+function show(n){
+  i=(n+slides.length)%slides.length;
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  dots.querySelectorAll('.dt').forEach((d,k)=>d.classList.toggle('on',k===i));
+  counter.textContent=(i+1)+' / '+slides.length;
+  prog.style.width=((i+1)/slides.length*100)+'%';
+  const sl=slides[i];
+  if(sl.hasAttribute('data-countup'))countUp(sl);
+}
+document.getElementById('next').onclick=()=>show(i+1);
+document.getElementById('prev').onclick=()=>show(i-1);
+addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' '].includes(e.key)){show(i+1);e.preventDefault();}
+  if(['ArrowLeft','PageUp'].includes(e.key))show(i-1);
+  if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);
+});
+
+/* init */
+buildGates();renderGate(0);
+buildExpertNav();renderExpert(0);buildDomNav();renderDomain(0);buildHeat();buildMatrix();
+prog.style.width=(1/slides.length*100)+'%';
+</script>
+</body>
+</html>
